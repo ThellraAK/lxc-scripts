@@ -5,5 +5,6 @@ mv /root/str*/* /root
 adduser -D relay
 mv /root/* /home/relay
 chown -R relay:relay /home/relay
+chmod -R 700 /home/relay
 crontab -l | { cat; echo "/usr/bin/screen -dmS syncthingrelay su relay -c '/home/relay/strelaysrv -pools= -status-srv=:22068 -listen=:22067  -protocol=tcp4 -debug'
 "; } | crontab -
