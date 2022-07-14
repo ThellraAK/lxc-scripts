@@ -21,14 +21,14 @@ local:vztmpl/alpine-3.16-default_20220622_amd64.tar.xz \
 --swap 0  \
 --features nesting=1  \
 --rootfs volume=local-lvm:1,mountoptions=noatime
-
-pct exec $1 apk add screen
-
+echo "Created LXC Container with VMID $1 with hostname $2 allowing it to have $3MB of ram, with a static ip of $4"
+pct exec $1 apk add screen curl ca-certificates
+echo "added Screen, curl, ca-certificates"
 pct push $1 ./cert.pem /root/cert.pem
 pct push $1 ./key.pem /root/key.pem
 pct push $1 ./getit.sh /root/getit.sh
-pct exec $1 apk add curl
-pct exec $1 apk add ca-certificates
 pct exec $1 sh /root/getit.sh
+echo "running script after copying files, sleeping for 5 seconds, then rebooting"
 sleep 5
-pct restart $1
+echo "rebooting VMID $1"
+pct reboot $1
