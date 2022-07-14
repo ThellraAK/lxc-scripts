@@ -6,5 +6,5 @@ adduser -D relay
 mv /root/* /home/relay
 chown -R relay:relay /home/relay
 chmod -R 700 /home/relay
-crontab -l | { cat; echo "/usr/bin/screen -dmS syncthingrelay su relay -c '/home/relay/strelaysrv -pools= -status-srv=:22068 -listen=:22067  -protocol=tcp4 -debug'
+crontab -l | { cat; echo "@reboot /usr/bin/screen -dmS syncthingrelay su relay -s /bin/ash -c '/home/relay/strelaysrv -pools= -status-srv=:22068 -listen=:22067  -protocol=tcp4 -debug'
 "; } | crontab -
