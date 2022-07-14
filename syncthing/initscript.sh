@@ -8,5 +8,5 @@ echo "extrated it to /root and flattened the directory"
 adduser -D syncthing
 mv /root/* /home/syncthing
 chown -R syncthing:syncthing /home/syncthing/*
-chmod -R 700 /home/relay/*
+chmod -R 700 /home/syncthing/*
 
