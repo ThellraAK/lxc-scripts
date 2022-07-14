@@ -27,7 +27,7 @@ pct exec $1 apk add screen curl ca-certificates
 echo "added Screen, curl, ca-certificates"
 #pct push $1 ./cert.pem /root/cert.pem
 #pct push $1 ./key.pem /root/key.pem
-pct push $1 ./initscript /root/initscript.sh
+pct push $1 ./initscript.sh /root/initscript.sh
 pct exec $1 sh /root/initscript.sh
 echo "running script after copying files, sleeping for 5 seconds, then rebooting"
 sleep 5
