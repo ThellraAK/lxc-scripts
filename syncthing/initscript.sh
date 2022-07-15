@@ -1,12 +1,10 @@
-curl -s https://api.github.com/repos/syncthing/syncthing/releases/latest \
-  | awk -F': ' '/syncthing-linux-amd64-/ && /\.tar.gz/ {gsub(/"/, "", $(NF)); system("curl -LO " $(NF))}'
-echo "Grabbed latest relay server tarball"
-# Above taken from https://www.jwillikers.com/one-liner-to-fetch-the-latest-github-release
-tar xf /syncthing-linux-amd64-*.tar.gz -C /root
-mv /root/syncthing-linux-amd64-*/* /root
-echo "extrated it to /root and flattened the directory"
 adduser -D syncthing
-mv /root/* /home/syncthing
-chown -R syncthing:syncthing /home/syncthing/*
-chmod -R 700 /home/syncthing/*
-
+rc-update add syncthing
+service syncthing start
+service syncthing stop
+mkdir /Syncthing
+chown -R syncthing:syncthing /Syncthing
+ls -la /var/lib/syncthing/.config/syncthing/config.xml
+sed -i 's+path="/var/lib/syncthing/Sync"+path="/Syncthing"+' /var/lib/syncthing/.config/syncthing/config.xml
+sed -i 's/^        <address>127.0.0.1:8384<\/address>$/        <address>0.0.0.0:8384<\/address>/' /var/lib/syncthing/.config/syncthing/config.xml
+service syncthing start
