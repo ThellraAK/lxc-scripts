@@ -1,5 +1,7 @@
 DEVICE-ID=LongDeviceIDofIt
 RELAYADDRESS=relay://fqdnorIP:PORT//?id=DeviceIDofit
+USERNAME=changeme
+PASSWORD=noreally
 
 sed -i 's+        <listenAddress>default</listenAddress>+        <listenAddress>default</listenAddress>\n        <listenAddress>$RELAYADDRESS</listenAddress>+' /var/lib/syncthing/.config/syncthing/config.xml
 cat /var/lib/syncthing/.config/syncthing/config.xml | grep "listenAddress"
@@ -32,3 +34,9 @@ curl -X PUT -H "X-API-Key: $apikey"  -d '
 }
 
 '   http://$myip:8384/rest/config/devices/$DEVICE-ID
+
+curl -X PATCH -H "X-API-Key: $apikey"  -d '
+{
+  "user": "$USERNAME",
+  "password": "$PASSWORD"
+} ' http://$myip:8384/rest/config/gui
