@@ -13,3 +13,5 @@ RELAYADDRESS=relay://fqdnorIP:PORT//?id=DeviceIDofit
 Device-ID is a syncthing device you'd like added as an introducer, and autoaccepter.
 
 Relay Address is the address of a private relay you've set up, if you don't want to depend on NAT transversal, or 3rd parties helping you punch through NAT.
+
+Username/password variables in privscript really don't want to work, had to replace it in the bottom to get everything working
