@@ -20,7 +20,7 @@ local:vztmpl/alpine-3.16-default_20220622_amd64.tar.xz \
 --start 1  \
 --swap 0  \
 --features nesting=1  \
--mp0 /mount/rust/syncthing,mp=/synchome,ro=1 \
+-mp0 /mount/rust/syncthing,mp=/Syncthing,ro=1 \
 --rootfs volume=local-lvm:1,mountoptions=noatime
 echo "Created LXC Container with VMID $1 with hostname $2 allowing it to have $3MB of ram, with a static ip of $4"
 pct exec $1 apk add syncthing
