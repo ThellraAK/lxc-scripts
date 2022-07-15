@@ -5,7 +5,7 @@
 # $4 static IP
 
 echo "[RULES]" >> /etc/pve/firewall/$1.fw
-echo "GROUP syncthing-relay" >> /etc/pve/firewall/$1.fw
+echo "GROUP syncthing-main" >> /etc/pve/firewall/$1.fw
 
 pct create $1 \
 local:vztmpl/alpine-3.16-default_20220622_amd64.tar.xz \
@@ -23,8 +23,8 @@ local:vztmpl/alpine-3.16-default_20220622_amd64.tar.xz \
 -mp0 /mount/rust/syncthing,mp=/synchome,ro=1 \
 --rootfs volume=local-lvm:1,mountoptions=noatime
 echo "Created LXC Container with VMID $1 with hostname $2 allowing it to have $3MB of ram, with a static ip of $4"
-pct exec $1 apk add screen curl ca-certificates
-echo "added Screen, curl, ca-certificates"
+pct exec $1 apk add syncthing
+echo "syncthing"
 #pct push $1 ./cert.pem /root/cert.pem
 #pct push $1 ./key.pem /root/key.pem
 pct push $1 ./initscript.sh /root/initscript.sh
